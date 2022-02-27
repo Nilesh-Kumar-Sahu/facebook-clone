@@ -1,26 +1,26 @@
 class UsersController < ApplicationController
+    before_action :authenticate_user!
+    before_action :admin_user,   only: :destroy
+
+
     def show
         @user = User.find(params[:id])
     end
 
-    def new
-        @user = User.new
+    def index
+        @users = User.paginate(page: params[:page])
     end
 
-    def create
-        @user = User.new(user_params)
-        if @user.save
-            flash[:success] = "Welcome to Facebook"
-            redirect_to user_url(@user)
-            # redirect_to @user
-        else
-            render 'devise/registrations/new'
-        end
+    def destroy
+        User.find(params[:id]).destroy
+        flash[:success] = "User deleted"
+        redirect_to users_url
     end
 
     private
-    def user_params
-        params.require(:user).permit(:name, :email, :password,
-                                     :password_confirmation)
+
+    # Confirms an admin user.
+    def admin_user
+        redirect_to(root_url) unless current_user.admin?
     end
 end

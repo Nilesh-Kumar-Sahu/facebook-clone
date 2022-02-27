@@ -11,7 +11,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # POST /resource
   # def create
-  #   super
+  #   @user = User.new(user_params)
+  #   if @user.save
+  #     flash[:success] = "Welcome to Facebook"
+  #     redirect_to user_url(@user)
+  #     # redirect_to @user
+  #   else
+  #     render 'devise/registrations/new'
+  #   end
   # end
 
   # GET /resource/edit
@@ -50,9 +57,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
   # end
 
-  # The path used after sign up.
+  # The path used after sign up. -- giving error
+  # def user_path(resource)
+  #   @user = User.new(user_params)
+  #   redirect_to @user
+  # end
+
   def after_sign_up_path_for(resource)
-    flash[:notice] = 'Welcome to Facebook'
+    flash[:success] = 'Welcome to Facebook'
     user_path(resource) # Specify the redirect destination path here
   end
 
@@ -60,4 +72,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  def user_params
+    params.require(:user).permit(:name, :email, :password,
+                                 :password_confirmation)
+  end
 end
