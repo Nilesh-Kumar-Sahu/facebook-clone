@@ -3,9 +3,9 @@
     <%= link_to "facebook", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li id="header-link-color"><%= link_to "Home", '#' %></li>
-        <li id="header-link-color"><%= link_to "Help", '#' %></li>
-        <li id="header-link-color"><%= link_to "Log in", '#' %></li>
+        <li><%= link_to "Log in", new_user_session_path %></li>
+        <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+
       </ul>
     </nav>
   </div>

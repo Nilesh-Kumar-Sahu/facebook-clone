@@ -1,0 +1,34 @@
+<%provide(:title, "Home")%>
+
+<section class ="sign-up">
+  <h1>Sign Up</h1>
+
+  <h2>It’s free and always will be.</h2>
+
+  <%= form_for(:user, url: registration_path(:user)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="field">
+      <div class="first-name">
+        <%= f.text_field :name, autofocus: true, autocomplete: "name", id: "new_user_name", placeholder: "First Name" %>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", id: "new_user_email", placeholder: "Your Email" %>
+    </div>
+
+    <div class="field">
+      <%= f.password_field :password, autocomplete: "new-password", id: "new_user_password", placeholder: "New Password" %>
+    </div>
+
+    <div class="field">
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", id: "new_user_password_confirmation", placeholder: "Re-enter Your Password" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Sign up", class: "btn btn-primary" %>
+    </div>
+
+  <% end %>
+
+</section>
