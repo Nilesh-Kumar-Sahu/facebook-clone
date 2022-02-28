@@ -5,6 +5,7 @@
       <ul class="nav navbar-nav navbar-right">
 
         <% if user_signed_in? %>
+          <li><%= link_to "Home", root_path %></li>
           <li><%= link_to "Find Friends", users_path %></li>
           <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
           <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>

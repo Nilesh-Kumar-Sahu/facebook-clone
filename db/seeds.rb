@@ -23,3 +23,10 @@ User.create!(name:  "Nilesh Kumar",
                password:              password,
                password_confirmation: password)
 end
+
+# Generate posts for a subset of users.
+users = User.order(:created_at).take(10)
+5.times do
+  content = Faker::Lorem.sentence(word_count: 15)
+  users.each { |user| user.posts.create!(content: content) }
+end

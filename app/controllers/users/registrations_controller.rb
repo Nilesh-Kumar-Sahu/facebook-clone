@@ -65,7 +65,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def after_sign_up_path_for(resource)
     flash[:success] = 'Welcome to Facebook'
-    user_path(resource) # Specify the redirect destination path here
+    users_path(resource) # Specify the redirect destination path here
   end
 
   # The path used after sign up for inactive accounts.
