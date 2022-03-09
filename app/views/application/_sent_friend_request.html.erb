@@ -1,0 +1,5 @@
+<% friendship = current_user.sent_requests.find_by(friend_id: user.id) %>
+
+<%= form_with(model: friendship,  method: :delete, remote: true)  do |f| %>
+  <%= f.submit 'Cancel Request', class: "btn btn-warning" %>
+<% end %>

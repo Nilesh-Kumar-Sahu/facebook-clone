@@ -6,8 +6,20 @@
       <h1>
         <%= gravatar_for @user %>
         <%= @user.name %>
+        <%= render 'friend_buttons', user: @user%>
+
       </h1>
     </section>
+    <section class="stats">
+      <%= render 'shared/stats' %>
+    </section>
+    <% if @friends.any? %>
+      <div class="user_avatars">
+        <% @friends.take(10).each do |user| %>
+          <%= link_to gravatar_for(user, size: 80), user %>
+        <% end %>
+      </div>
+    <% end %>
   </aside>
 
   <div class="col-md-8">

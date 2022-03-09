@@ -7,11 +7,24 @@
         ago.
       </time>
     </div>
+    <% if current_user?(post.user) %>
+      <div class="dropdown">
+        <button class="dropbtn">
+          <i class="fas fa-ellipsis-v"></i>
+        </button>
+        <div class="dropdown-content">
+          <%= link_to 'Edit', edit_post_path(post.id) %>
+          <%= link_to 'Delete', post_path(post.id), method: :delete %>
+        </div>
+      </div>
+    <% end %>
   </header>
   <p class="post-content"><%= post.content %></p>
   <%= image_tag post.display_image if post.image.attached? %>
-  <% if current_user?(post.user) %>
-    <%= link_to "delete", post, method: :delete,
-                data: { confirm: "You sure?" } %>
-  <% end %>
+  <%#debugger %>
+  <% if post.comments.any? %>
+    <%#= render partial: 'comments/comment', locals: {comment: post.comments} %>
+    <%= render post.comments %>
+<% end %>
+  <%= render 'comments/new_comment', post: post %>
 </div>

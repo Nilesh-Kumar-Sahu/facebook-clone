@@ -1,0 +1,13 @@
+<% provide(:title, "#{@pending.count} Requests") %>
+<% req_cnt = @pending.count %>
+<h1>You have <%= req_cnt %> pending <%= 'request'.pluralize(req_cnt) %> <i class="fa-solid fa-face-grin-wide"></i></h1>
+
+<ul class="users">
+  <% @pending.each do |user| %>
+    <li>
+      <%= gravatar_for user, size: 50 %>
+      <%= link_to user.name, user %>
+      <%= render 'friend_buttons', user: user %>
+    </li>
+  <% end %>
+</ul>

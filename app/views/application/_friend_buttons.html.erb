@@ -1,0 +1,12 @@
+<% unless user == current_user %>
+    <% if current_user.friend?(user)%>
+      <%= render 'are_friends', user: user %>
+    <% elsif current_user.pending_request?(user) %>
+      <%= render 'pending_friend_request', user: user %>
+    <% elsif current_user.sent_request?(user) %>
+      <%= render 'sent_friend_request', user: user %>
+    <% else %>
+      <%= render 'new_friend_request', user: user %>
+    <% end %>
+<% end %>
+ 

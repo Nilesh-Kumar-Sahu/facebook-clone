@@ -1,6 +1,10 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user! , only: [:create, :destroy]
-  before_action :correct_user, only: :destroy
+  before_action :authenticate_user!, only: %i[create destroy]
+  before_action :find_user, only: %i[edit update destroy]
+
+  def index
+    # debugger
+  end
 
   def create
     @post = current_user.posts.build(post_params)
@@ -15,6 +19,21 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+    @title = 'Edit Page'
+  end
+
+  def update
+    # debugger
+    if @post.update(post_params)
+      flash[:success] = 'Post updated successfully'
+      redirect_to root_url
+    else
+      flash[:warning] = 'Something went wrong, post not edited'
+      render 'edit'
+    end
+  end
+
   def destroy
     @post.delete
     flash[:success] = 'Post deleted successfully'
@@ -24,10 +43,10 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:content)
+    params.require(:post).permit(:content, :image)
   end
 
-  def correct_user
+  def find_user
     @post = current_user.posts.find_by(id: params[:id])
     redirect_to root_url if @post.nil?
   end

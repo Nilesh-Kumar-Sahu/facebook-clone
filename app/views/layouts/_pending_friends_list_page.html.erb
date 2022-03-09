@@ -1,0 +1,10 @@
+<% pending_friends = current_user.pending_friends_list %>
+
+<ul class="dropdown-menu">
+  <% pending_friends.each do |user| %>
+    <li><%= link_to user.name, user %></li>
+  <% end %>
+  <li class="divider"></li>
+  <li><%= link_to 'See all', pending_requests_path, class: 'dropdown-item' %></li>
+</ul>
+

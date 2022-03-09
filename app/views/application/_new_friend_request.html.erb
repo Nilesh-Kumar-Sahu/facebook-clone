@@ -1,0 +1,4 @@
+<%= form_with(model: Friendship.new, remote: true ) do |f| %>
+  <%= f.hidden_field :friend_id, value: user.id %>
+  <%= f.submit 'Send Friend Request', class: "btn btn-primary" %>
+<% end %>

@@ -1,0 +1,17 @@
+<% provide(:title, @title) %>
+
+<div class="container">
+  <h3>Update your post</h3>
+  <div>
+    <%= form_with( model: @post, local: true) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.text_area :content%>
+      <%= f.submit "Update post", class: "btn btn-primary" %>
+
+      <span>
+        <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png" %>
+      </span>
+    <% end %>
+  </div>
+</div>

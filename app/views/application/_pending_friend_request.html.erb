@@ -1,0 +1,15 @@
+<% friendship = current_user.pending_requests.find_by(user_id: user.id) %>
+
+<div>
+  <div>
+    <%= form_with(model: friendship, remote: true) do |f| %>
+      <%= f.submit "Accept Request", class: "btn btn-success" %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form_with(model: friendship, method: :delete, remote: true) do |f| %>
+      <%= f.submit "Reject Request", class: "btn btn-warning" %>
+    <% end %>
+  </div>
+</div>
