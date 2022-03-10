@@ -1,6 +1,7 @@
 <div class="posts">
   <header>
     <div class="name-container">
+      <%# debugger %>
       <%= link_to gravatar_for(post.user, size: 50), post.user %>
       <h3 class="post-user-name"><%=link_to post.user.name, user_path(post.user)%></h3>
       <time class="post-time" datetime="<%=post.created_at%>"> <%= time_ago_in_words(post.created_at) %>
@@ -21,6 +22,8 @@
   </header>
   <p class="post-content"><%= post.content %></p>
   <%= image_tag post.display_image if post.image.attached? %>
+  <%# debugger %>
+  <%= render partial: 'likes/button', locals: { likeable: post } %>
   <%#debugger %>
   <% if post.comments.any? %>
     <%#= render partial: 'comments/comment', locals: {comment: post.comments} %>

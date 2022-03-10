@@ -14,7 +14,7 @@ User.create!(name:  "Nilesh Kumar",
              admin: true)
 
 # Generate a bunch of additional users.
-99.times do |n|
+35.times do |n|
   name  = Faker::Name.name
   email = "example-#{n+1}@railstutorial.org"
   password = "asdfghjkl"
@@ -26,7 +26,7 @@ end
 
 # Generate posts for a subset of users.
 users = User.order(:created_at).take(10)
-5.times do
+2.times do
   content = Faker::Lorem.sentence(word_count: 15)
   users.each { |user| user.posts.create!(content: content) }
 end

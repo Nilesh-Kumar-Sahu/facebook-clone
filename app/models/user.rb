@@ -12,8 +12,9 @@ class User < ApplicationRecord
            foreign_key: :friend_id, class_name: 'Friendship'
 
   has_many :pending_friends, through: :pending_requests, source: :user
+  has_many :likes, dependent: :destroy
 
-  before_save {self.email = email.downcase}
+  before_save { self.email = email.downcase }
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -22,6 +23,13 @@ class User < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 50 }
 
+  def self.search(search)
+    if search
+      User.where('name LIKE ?', "%#{search}%")
+    else
+      User.all
+    end
+  end
 
   def feed
     Post.where('user_id IN (?) OR user_id = ?', friend_ids, id)

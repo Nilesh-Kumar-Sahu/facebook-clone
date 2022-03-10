@@ -12,8 +12,15 @@ Rails.application.routes.draw do
       get :friends
     end
   end
+
   resources :posts
   resources :comments
+
+  resources :likes
   resources :friendships
   get :pending_requests, to: 'friendships#pending'
+
+  # get '*path' => redirect('users')
+  # match '*path', to: 'application#routing_error', via: %i[get post]
+
 end

@@ -17,7 +17,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find_by(id: params[:id])
     return unless @comment
 
-    @comment.delete
+    @comment.destroy
     flash[:success] = 'Comment was deleted successfully'
     redirect_to request.referer || root_url
   end
