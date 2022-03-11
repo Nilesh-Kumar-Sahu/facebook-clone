@@ -1,6 +1,8 @@
+<div>
+   <% cnt = likeable.likes.count %>
+  <%= "#{cnt} " + 'Like'.pluralize(cnt) %>
+</div>
 
-<% cnt = likeable.likes.count %>
-<%= "#{cnt} " + 'Like'.pluralize(cnt) %>
 <%# debugger %>
 <% like = current_user.likes.find_by(likeable: likeable) if !current_user.nil? %>
 <% if like.nil? %>

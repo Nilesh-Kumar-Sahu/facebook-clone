@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users,
              controllers: {
-               registrations: 'users/registrations'
+               registrations: 'users/registrations',
+               omniauth_callbacks: 'omniauth'
              }
 
   root 'static_pages#home'
   get '/signup', to: 'users#new'
+  get '/users/auth/callback', to: 'omniauth#github'
 
   resources :users do
     member do
